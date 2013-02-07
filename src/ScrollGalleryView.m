@@ -21,6 +21,8 @@
 
 //THERE IS AN ISSUE WITH THE OFFSETS!!!!!!!!!!!!!!!!!!!
 
+
+
 -(NSArray*)images{
     if(_images) return _images;
     _images = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"2.png"], [UIImage imageNamed:@"3.png"], [UIImage imageNamed:@"4.png"],[UIImage imageNamed:@"5.png"], nil];
@@ -67,8 +69,8 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    CGFloat screenWidth = screenRect.size.height;
+    CGFloat screenHeight = screenRect.size.width;
     
     NSLog(@"initialisation = screenwidth = %f,screenheight %f",screenWidth,screenHeight);
 
@@ -76,7 +78,7 @@
     if(self = [super initWithCoder:aDecoder]){
         self.pagingEnabled = YES;
         for(int i=0; i< self.images.count + 2; i++){
-            CGRect rect = CGRectMake(currentPosition, 0, screenHeight, screenWidth);
+            CGRect rect = CGRectMake(currentPosition, 0, screenWidth, screenHeight);
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:rect];
             if(i == 0)
                 imageView.image = self.images[self.images.count - 1];

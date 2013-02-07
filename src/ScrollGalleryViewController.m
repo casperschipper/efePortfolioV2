@@ -30,6 +30,15 @@
     
     //turn this into a property so we can load dynam the amount of pages
     self.pageControl.numberOfPages = 4;
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    CGFloat screenWidth = screenRect.size.height;
+    CGFloat screenHeight = screenRect.size.width;
+    
+    self.scrollView.frame = CGRectMake(0, 0, screenWidth ,  screenHeight);
+    
+
 }
 
 - (void)didReceiveMemoryWarning
