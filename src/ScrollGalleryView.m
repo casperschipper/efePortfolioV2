@@ -72,8 +72,6 @@
     CGFloat screenWidth = screenRect.size.height;
     CGFloat screenHeight = screenRect.size.width;
     
-    NSLog(@"initialisation = screenwidth = %f,screenheight %f",screenWidth,screenHeight);
-
     float currentPosition = 0;
     if(self = [super initWithCoder:aDecoder]){
         self.pagingEnabled = YES;
@@ -122,8 +120,6 @@
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    NSLog(@"screenwidth = %f,screenheight %f",screenWidth,screenHeight);
-
     if(self.contentOffset.x == 0){
         self.contentOffset = CGPointMake(self.images.count * screenWidth, 0);
     }
