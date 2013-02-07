@@ -9,6 +9,12 @@
 #import "BoxesApp.h"
 
 #import "PortifolioViewController.h"
+#import "ReachabilityTestViewController.h"
+#import "VimeoViewController.h"
+#import "YouTubeJSONViewController.h"
+#import "YouTubeViewController.h"
+#import "ImageCachedTestViewController.h"
+#import "ActivityTestViewController.h"
 
 @interface LaunchAppViewController () {}
 
@@ -78,6 +84,56 @@
     PortifolioViewController *portifolioVC = [[PortifolioViewController alloc]init];
     [self.navigationController pushViewController:portifolioVC animated:YES];
 }
+
+-(IBAction)launchSocketTest:(id)sender{
+    ReachabilityTestViewController *rtvc = [[ReachabilityTestViewController alloc]init];
+    [self.navigationController pushViewController:rtvc animated:YES];
+}
+
+-(IBAction)launchVimeoView:(id)sender{
+    VimeoViewController *vvc = [[VimeoViewController alloc]init];
+    [self.navigationController pushViewController:vvc animated:YES];
+}
+
+-(IBAction)launchYouTubeJSONView:(id)sender{
+    //here we need to decide the URL for the youTube/vimeo source
+    NSURL *url = [NSURL URLWithString:@"http://gdata.youtube.com/feeds/api/videos?alt=json&author=AKB48"];
+    //USE a dictionary to load the videos
+    /*
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *res, NSData *data, NSError *error) {
+                               NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data
+                                                                                   options:0
+                                                                                     error:nil];
+                               list = [[dic objectForKey:@"feed"] objectForKey:@"entry"];
+                               [self.tableView reloadData];
+                           }];
+     */
+
+    //CHECK HERE THE URL as it is loaded from a server
+    NSString *videoId = @"http://www.youtube.com/watch?v=1QebKMqdElg";
+    YouTubeJSONViewController *ytvc = [[YouTubeJSONViewController alloc]initWithVideoId:videoId];
+    [self.navigationController pushViewController:ytvc animated:YES];
+}
+
+-(IBAction)launchYouTubeView:(id)sender{
+    YouTubeViewController *ytvc = [[YouTubeViewController alloc]init];
+    [self.navigationController pushViewController:ytvc animated:YES];
+}
+
+-(IBAction)launchImageLoader:(id)sender{
+    ImageCachedTestViewController *ivc = [[ImageCachedTestViewController alloc]init];
+    [self.navigationController pushViewController:ivc animated:YES];
+}
+
+-(IBAction)launchActivityTest:(id)sender{
+    ActivityTestViewController *avc = [[ActivityTestViewController alloc]init];
+    [self.navigationController pushViewController:avc animated:YES];
+}
+
+//////////////////////////////////////////////////
+#pragma mark - Actions to call OFW sketches
 
 -(void)launchCloudView:(id)sender{
     CloudGesture *cloudApp = new CloudGesture();
