@@ -38,6 +38,9 @@
     
     self.scrollView.frame = CGRectMake(0, 0, screenWidth ,  screenHeight);
     
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
+
+    
 
 }
 
