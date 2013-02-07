@@ -66,8 +66,12 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+    
+    NSLog(@"initialisation = screenwidth = %f,screenheight %f",screenWidth,screenHeight);
+
     float currentPosition = 0;
     if(self = [super initWithCoder:aDecoder]){
         self.pagingEnabled = YES;
@@ -80,14 +84,14 @@
                 imageView.image = self.images[0];
             else
                 imageView.image = self.images[i - 1];
-            currentPosition += screenHeight;
+            currentPosition += screenWidth;
             imageView.contentMode = UIViewContentModeScaleToFill;
             self.showsHorizontalScrollIndicator = NO;
             self.showsVerticalScrollIndicator = NO;
             [self addSubview:imageView];
         }
     }
-    self.contentOffset = CGPointMake(screenHeight, 0);//320
+    self.contentOffset = CGPointMake(screenWidth, 0);//320
     self.contentSize = CGSizeMake(currentPosition, self.bounds.size.height);
     return self;
 }
@@ -115,11 +119,14 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+    
+    NSLog(@"screenwidth = %f,screenheight %f",screenWidth,screenHeight);
+
     if(self.contentOffset.x == 0){
-        self.contentOffset = CGPointMake(self.images.count * 320, 0);
+        self.contentOffset = CGPointMake(self.images.count * screenWidth, 0);
     }
-    if(self.contentOffset.x == (self.images.count +1) * 320){
-        self.contentOffset = CGPointMake(320, 0);
+    if(self.contentOffset.x == (self.images.count +1) * screenWidth){
+        self.contentOffset = CGPointMake(0, 0);
     }
     [self.pageControlDelegate ScrollGalleryView:self scrolledToPage:abs(self.contentOffset.x / screenHeight) -1];//320
 }
